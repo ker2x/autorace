@@ -14,5 +14,5 @@ include_directories(${SDL2_INCLUDE_DIRS})
 find_package(qhull)
 include_directories(${QHULL_INCLUDE_DIRS})
 
-add_executable(autorace main.cpp standard_bench.cpp App.cpp App.h Track.cpp Track.h Car.cpp Car.h)
+add_executable(autorace main.cpp standard_bench.cpp app.cpp app.h track.cpp track.h car.cpp car.h)
 target_link_libraries(autorace benchmark::benchmark ${SDL2_LIBRARIES} Qhull::qhullcpp Qhull::qhull_r)

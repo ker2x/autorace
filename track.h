@@ -10,15 +10,15 @@
 #include <boost/random.hpp>
 
 
-class Track {
+class track {
 
     orgQhull::Qhull qh;
     boost::random::mt19937 rnd;
 
 
 public:
-    Track() = default;
-    void GenerateTrack();
+    track() = default;
+    void generateTrack();
 };
 
 

@@ -6,7 +6,7 @@
 #define AUTORACE_CAR_H
 
 
-class Car {
+class car {
     unsigned int id;
     
 };

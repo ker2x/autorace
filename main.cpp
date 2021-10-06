@@ -1,9 +1,9 @@
 #include <iostream>
 #include "standard_bench.h"
-#include "App.h"
+#include "app.h"
 
 
-// Bench from standard test
+//Bench from standard test
 //BENCHMARK(BM_empty);
 //BENCHMARK(BM_mt19937);
 //BENCHMARK(BM_rndFloat);
@@ -11,7 +11,7 @@
 int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
 
     /*
-    // Run benchmarks
+    // run benchmarks
     ::benchmark::Initialize(&argc, argv);
     if (::benchmark::ReportUnrecognizedArguments(argc, argv)) {
         std::cout << "ReportUnrecognizedArguments" << std::endl;
@@ -23,8 +23,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
 
     atexit(SDL_Quit);
 
-    App application;
-    application.CreateGraphicContext(1024, 768, false);
-    application.Run();
+    app application;
+    application.createGraphicContext(1024, 768, false);
+    application.run();
     return 0;
 }
