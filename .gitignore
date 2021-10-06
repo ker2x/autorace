@@ -5,5 +5,3 @@
 .idea
 /CMakeFiles/
 /benchmark
-/benchmark/*
-/benchmark/test/
