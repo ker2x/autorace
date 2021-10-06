@@ -69,6 +69,18 @@ void BM_stdmt19937(benchmark::State& state) {
     state.SetBytesProcessed(state.iterations() * sizeof(int));
 }
 
+void BM_rndFloat(benchmark::State &state) {
+    boost::random::mt19937 gen;
+    boost::random::uniform_real_distribution<double> doubleRand(-0.5, 0.5);
+    for(auto _ : state) {
+        benchmark::DoNotOptimize(doubleRand(gen));
+    }
+    state.SetItemsProcessed(state.iterations());
+    state.SetBytesProcessed(state.iterations() * sizeof(double));
+
+}
+
+
 void cacheBench(benchmark::State &state)
 {
     int bytes = 1 << state.range(0);
@@ -113,4 +125,5 @@ void cacheBench(benchmark::State &state)
     state.SetBytesProcessed(long(state.iterations()) * long(bytes));
     state.SetLabel(std::to_string(bytes / 1024) + "kb");
 }
+
 

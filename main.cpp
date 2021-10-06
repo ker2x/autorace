@@ -1,26 +1,17 @@
 #include <iostream>
 #include "standard_bench.h"
 #include "App.h"
-#include <libqhullcpp/Qhull.h>
-
 
 
 // Bench from standard test
-BENCHMARK(BM_empty);
+//BENCHMARK(BM_empty);
+//BENCHMARK(BM_mt19937);
+//BENCHMARK(BM_rndFloat);
 
+int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
 
-int main(int argc, char** argv) {
-
-    App app;
-    orgQhull::Qhull qh;
-
-
-
-    // Hi !
-    std::cout << "Hello, World!" << std::endl;
-
-    // Run benchmarks
     /*
+    // Run benchmarks
     ::benchmark::Initialize(&argc, argv);
     if (::benchmark::ReportUnrecognizedArguments(argc, argv)) {
         std::cout << "ReportUnrecognizedArguments" << std::endl;
@@ -28,15 +19,12 @@ int main(int argc, char** argv) {
     }
     ::benchmark::RunSpecifiedBenchmarks();
     ::benchmark::Shutdown();
-    */
+*/
+
+    atexit(SDL_Quit);
 
     App application;
-    if(application.Init()) {
-        //application.Run();
-    } else {
-        std::cout << "Couldn't initialize SDL2. Goodbye." << std::endl;
-    }
+    application.CreateGraphicContext(1024, 768, false);
     application.Run();
-
     return 0;
 }

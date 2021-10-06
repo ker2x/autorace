@@ -6,24 +6,23 @@
 #define AUTORACE_APP_H
 
 #include <SDL.h>
+//#include <SDL/SDL_opengl.h>
 #include <iostream>
 
 class App {
 
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_Event event;
+private:
+    std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window;
+    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer;
+    bool keepRunning = true;
+    SDL_Event event {};
 
-    bool keepRunning;
+    void HandleEvent() noexcept;
 
 public:
     App();
-    virtual ~App();
 
-    bool Init();
-    bool CreateWindow(int width, int height);
-    bool CreateRenderer();
-    void HandleEvent();
+    void CreateGraphicContext(int width, int height, bool fullscreen) noexcept;
     void Run();
 
 };
