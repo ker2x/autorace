@@ -4,5 +4,6 @@
 /cmake-build-relwithdebinfo/
 .idea
 /CMakeFiles/
-/benchmark/
+/benchmark
+/benchmark/*
 /benchmark/test/
