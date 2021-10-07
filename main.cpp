@@ -2,7 +2,6 @@
 //#include "standard_bench.h"
 #include "app.h"
 
-
 //Bench from standard test
 //BENCHMARK(BM_empty);
 //BENCHMARK(BM_mt19937);

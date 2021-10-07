@@ -10,6 +10,7 @@
 #pragma ide diagnostic ignored "clion-misra-cpp2008-7-4-3"
 
 #include "app.h"
+#include "hull.h"
 
 app::app()
     : window(nullptr, SDL_DestroyWindow)
@@ -41,10 +42,24 @@ void app::createGraphicContext(int width, int height, bool fullscreen) noexcept 
  */
 void app::run() {
     std::cout << "Entering run()" << std::endl;
+
+    std::vector<double> vecX, vecY;
+    vecX = hull::generateRandomCloud<double>(50,0, 700);
+    vecY = hull::generateRandomCloud<double>(50,0, 700);
+
+
     while(keepRunning) {
         handleEvent();
         (void) SDL_SetRenderDrawColor(renderer.get(), 96, 150, 96, 255);
         (void) SDL_RenderClear(renderer.get());
+
+        (void) SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
+        for(double x :vecX) {
+            for(double y :vecY) {
+                SDL_RenderDrawPointF(renderer.get(), x, y);
+            }
+        }
+
         SDL_RenderPresent(renderer.get());
     }
     std::cout << "Exiting run()" << std::endl;
