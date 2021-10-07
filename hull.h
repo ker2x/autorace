@@ -10,7 +10,7 @@
 #include <boost/random.hpp>
 #include <SDL.h>
 #include <vector>
-#include <time.h>
+#include <ctime>
 
 
 class hull {
@@ -19,7 +19,7 @@ public:
     boost::random::mt19937 randgen;
 
     hull() {
-        this->randgen.seed(static_cast<unsigned int>(std::time(0)));
+        this->randgen.seed(static_cast<unsigned int>(std::time(nullptr)));
     }
 
     template <class T>

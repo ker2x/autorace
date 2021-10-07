@@ -20,7 +20,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
     ::benchmark::Shutdown();
 */
 
-    atexit(SDL_Quit);
+    if(atexit(SDL_Quit) != 0) {
+        std::cout << "atexit error : " << std::strerror(errno);
+        exit(errno);
+    }
 
     app application;
     application.createGraphicContext(1024, 768, false);
