@@ -50,13 +50,12 @@ void app::run() {
         (void) SDL_SetRenderDrawColor(renderer.get(), 96, 150, 96, 255);
         (void) SDL_RenderClear(renderer.get());
 
-        vecX = h.generateRandomCloud<double>(250,0, 1024);
-        vecY = h.generateRandomCloud<double>(250,0, 768);
         (void) SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
-        for(double x :vecX) {
-            for(double y :vecY) {
-                (void) SDL_RenderDrawPointF(renderer.get(), x, y);
-            }
+        SDL_RenderDrawPointF(renderer.get(), 128, 128);
+        auto cloud = h.generateRandomPointcloud<double>(25000,0.0,0.0, 1024.0, 768.0);
+
+        for(auto p: cloud) {
+            (void) SDL_RenderDrawPointF(renderer.get(), p.x(), p.y());
         }
 
         SDL_RenderPresent(renderer.get());
