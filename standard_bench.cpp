@@ -3,10 +3,7 @@
 //
 
 #include "standard_bench.h"
-
 /*
- * DO NOTHING TEST
- */
 void BM_empty(benchmark::State& state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(state.iterations());
@@ -14,9 +11,6 @@ void BM_empty(benchmark::State& state) {
     state.SetItemsProcessed(state.iterations());
 }
 
-/*
- * LOOP TEST
- */
 void BM_loop(benchmark::State& state) {
     for (auto _ : state) {
         for(uint i = 0; i < state.range(0); ++i)
@@ -126,4 +120,4 @@ void cacheBench(benchmark::State &state)
     state.SetLabel(std::to_string(bytes / 1024) + "kb");
 }
 
-
+*/
