@@ -29,14 +29,13 @@ public:
     template <typename T>
     using point2D =  bgm::d2::point_xy<T>;
 
-    explicit hull(const uint seed = static_cast<uint>(std::time(nullptr))) {
+    explicit hull(const uint seed = static_cast<uint>(std::time(nullptr))) { // NOLINT(clion-misra-cpp2008-18-0-4)
         this->randgen.seed(seed);
     }
 
     template <typename T>
-    [[maybe_unused]] std::vector<T> generateRandomVector(uint nbPoint, T minBound, T maxBound) {
-
-        SDL_assert_release(minBound < maxBound);
+    [[maybe_unused]] [[nodiscard]]
+    std::vector<T> generateRandomVector(uint nbPoint, T minBound, T maxBound) noexcept {
 
         boost::random::uniform_real_distribution<T> rurd(minBound, maxBound);
         std::vector<T> cloud(nbPoint);
@@ -50,7 +49,8 @@ public:
 
 
     template <typename T>
-    std::vector<point2D<T>> generateRandomPointcloud(uint nbPoint, T minX, T minY, T maxX, T maxY) {
+    [[nodiscard]] [[maybe_unused]]
+    std::vector<point2D<T>> generateRandomPointcloud(uint nbPoint, T minX, T minY, T maxX, T maxY) noexcept {
 
         boost::random::uniform_real_distribution<T> rurdX(minX, maxX);
         boost::random::uniform_real_distribution<T> rurdY(minY, maxY);
