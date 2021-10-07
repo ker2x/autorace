@@ -42,21 +42,20 @@ void app::createGraphicContext(int width, int height, bool fullscreen) noexcept 
  */
 void app::run() {
     std::cout << "Entering run()" << std::endl;
-
     std::vector<double> vecX, vecY;
-    vecX = hull::generateRandomCloud<double>(50,0, 700);
-    vecY = hull::generateRandomCloud<double>(50,0, 700);
-
+    hull h;
 
     while(keepRunning) {
         handleEvent();
         (void) SDL_SetRenderDrawColor(renderer.get(), 96, 150, 96, 255);
         (void) SDL_RenderClear(renderer.get());
 
+        vecX = h.generateRandomCloud<double>(250,0, 1024);
+        vecY = h.generateRandomCloud<double>(250,0, 768);
         (void) SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
         for(double x :vecX) {
             for(double y :vecY) {
-                SDL_RenderDrawPointF(renderer.get(), x, y);
+                (void) SDL_RenderDrawPointF(renderer.get(), x, y);
             }
         }
 

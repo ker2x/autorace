@@ -10,27 +10,33 @@
 #include <boost/random.hpp>
 #include <SDL.h>
 #include <vector>
+#include <time.h>
 
 
 class hull {
 
 public:
+    boost::random::mt19937 randgen;
+
+    hull() {
+        this->randgen.seed(static_cast<unsigned int>(std::time(0)));
+    }
+
     template <class T>
-    static std::vector<T> generateRandomCloud(uint nbPoint, T minBound, T maxBound) {
+    std::vector<T> generateRandomCloud(uint nbPoint, T minBound, T maxBound) {
 
         SDL_assert_release(minBound < maxBound);
 
-        boost::random::mt19937 gen;
         boost::random::uniform_real_distribution<T> rurd(minBound, maxBound);
-        auto generator = [&rurd, &gen](){
-            return rurd(gen);
-        };
-
         std::vector<T> cloud(nbPoint);
         cloud.reserve(nbPoint);
-        std::generate(cloud.begin(), cloud.end(), generator);
+
+        for(auto& i: cloud) {
+            cloud.push_back(rurd(randgen));
+        }
         return cloud;
     }
+
 };
 
 
