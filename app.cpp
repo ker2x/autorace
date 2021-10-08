@@ -13,8 +13,8 @@
 #include "hull.h"
 
 app::app() noexcept
-    : window(nullptr, &SDL_DestroyWindow)
-    , renderer(nullptr, &SDL_DestroyRenderer)
+//    : window(nullptr, &SDL_DestroyWindow)
+//    , renderer(nullptr, &SDL_DestroyRenderer)
 {
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS|SDL_INIT_TIMER) < 0) {
         //throw std::runtime_error{std::string("Couldn't initialize SDL: ") + SDL_GetError()};

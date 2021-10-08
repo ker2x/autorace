@@ -14,8 +14,8 @@
 class app {
 
 private:
-    std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window;
-    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer;
+    std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window {nullptr, &SDL_DestroyWindow};
+    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer {nullptr, &SDL_DestroyRenderer};
     bool keepRunning = true;
     SDL_Event event {};
 
