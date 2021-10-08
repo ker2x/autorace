@@ -9,6 +9,8 @@
 #include <iostream>
 #include <memory>
 
+#include <boost/log/trivial.hpp>
+
 class app {
 
 private:
@@ -20,7 +22,7 @@ private:
     void handleEvent() noexcept;
 
 public:
-    app();
+    app() noexcept;
 
     void createGraphicContext(int width, int height, bool fullscreen) noexcept;
     void run();

@@ -12,13 +12,14 @@
 #include "app.h"
 #include "hull.h"
 
-app::app()
-    : window(nullptr, SDL_DestroyWindow)
-    , renderer(nullptr, SDL_DestroyRenderer)
-
+app::app() noexcept
+    : window(nullptr, &SDL_DestroyWindow)
+    , renderer(nullptr, &SDL_DestroyRenderer)
 {
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS|SDL_INIT_TIMER) < 0) {
-        throw std::runtime_error{std::string("Couldn't initialize SDL: ") + SDL_GetError()};
+        //throw std::runtime_error{std::string("Couldn't initialize SDL: ") + SDL_GetError()};
+        BOOST_LOG_TRIVIAL(fatal) << "Couldn't initialize SDL: " << SDL_GetError();
+        std::terminate();
     }
 }
 
@@ -41,8 +42,9 @@ void app::createGraphicContext(int width, int height, bool fullscreen) noexcept 
  * Main Loop
  */
 void app::run() {
-    std::cout << "Entering run()" << std::endl;
-    std::vector<float> vecX, vecY;
+    BOOST_LOG_TRIVIAL(debug) << "Entering run()" << std::endl;
+    std::vector<float> vecX;
+    std::vector<float> vecY;
     hull h;
 
     while(keepRunning) {
@@ -51,8 +53,7 @@ void app::run() {
         (void) SDL_RenderClear(renderer.get());
         (void) SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
 
-        auto cloud = h.generateRandomPointcloud<float>(25000,0.0,0.0, 1024.0, 768.0);
-        for(auto p: cloud) {
+        for(auto p: h.generateRandomPointcloud<float>(25000,0.0,0.0, 1024.0, 768.0)) {
             (void) SDL_RenderDrawPointF(renderer.get(), p.x(), p.y());
         }
 
@@ -61,7 +62,7 @@ void app::run() {
         //test
 //        std::vector<hull::point2D<float>> lmp = h.convexHullFromPoint2D<float>(cloud);
     }
-    std::cout << "Exiting run()" << std::endl;
+    BOOST_LOG_TRIVIAL(debug) << "Exiting run()" << std::endl;
 }
 /***
  * Handle SDL Event
@@ -75,15 +76,11 @@ void app::handleEvent() noexcept {
                 keepRunning = false;
                 break;
             case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_ESCAPE:
-                        keepRunning = false;
-                        break;
-                    default:
-                        std::cout << "KEYDOWN : " <<  event.key.keysym.scancode << std::endl;
-                        break;
-                }
-                break;
+                 if(event.key.keysym.sym == SDLK_ESCAPE) {
+                     keepRunning = false;
+                 } else {
+                     BOOST_LOG_TRIVIAL(debug) << "KEYDOWN : " << event.key.keysym.scancode << std::endl;
+                 }
             default:
                 break;
         }

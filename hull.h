@@ -5,10 +5,12 @@
 #ifndef AUTORACE_HULL_H
 #define AUTORACE_HULL_H
 
+// For random generator
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/multiprecision/cpp_bin_float.hpp>
 #include <boost/random.hpp>
 
+//for point_xy
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/geometries.hpp>
 
@@ -16,6 +18,7 @@
 
 #include <vector>
 #include <ctime>
+#include <optional>
 
 namespace bg = boost::geometry;
 namespace bgm = boost::geometry::model;
