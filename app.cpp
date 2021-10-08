@@ -42,7 +42,7 @@ void app::createGraphicContext(int width, int height, bool fullscreen) noexcept 
  */
 void app::run() {
     std::cout << "Entering run()" << std::endl;
-    std::vector<double> vecX, vecY;
+    std::vector<float> vecX, vecY;
     hull h;
 
     while(keepRunning) {
@@ -51,12 +51,15 @@ void app::run() {
         (void) SDL_RenderClear(renderer.get());
         (void) SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
 
-        auto cloud = h.generateRandomPointcloud<double>(25000,0.0,0.0, 1024.0, 768.0);
+        auto cloud = h.generateRandomPointcloud<float>(25000,0.0,0.0, 1024.0, 768.0);
         for(auto p: cloud) {
             (void) SDL_RenderDrawPointF(renderer.get(), p.x(), p.y());
         }
 
         SDL_RenderPresent(renderer.get());
+
+        //test
+//        std::vector<hull::point2D<float>> lmp = h.convexHullFromPoint2D<float>(cloud);
     }
     std::cout << "Exiting run()" << std::endl;
 }
