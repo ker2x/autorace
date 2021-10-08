@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.13)
 project(autorace)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 #set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unknown-pragmas -DBOOST_LOG_DYN_LINK")
 
 #add_subdirectory(benchmark)
 #include_directories(benchmark/include)
 
-find_package(Boost 1.76.0 COMPONENTS log log_setup REQUIRED) # COMPONENTS thread program_options context filesystem regex system)
+find_package(Boost 1.76.0 COMPONENTS log log_setup) # COMPONENTS thread program_options context filesystem regex system)
 include_directories(${Boost_INCLUDE_DIR})
 
 find_package(SDL2 REQUIRED)
